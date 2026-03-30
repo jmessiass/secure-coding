@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VulnBank - Fetch URL</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #1a1a2e; color: #eee; }
+        .navbar { background: #16213e !important; }
+        .card { background: #16213e; border: 1px solid #0f3460; }
+        .brand { color: #e94560; font-weight: bold; }
+        a { color: #53a8b6; }
+        .btn-primary { background: #e94560; border-color: #e94560; }
+        pre { background: #0d1117; color: #c9d1d9; padding: 15px; border-radius: 6px;
+              max-height: 400px; overflow-y: auto; font-size: 0.85rem; }
+        .card h4 { color: #ccd6f6; }
+        .card p { color: #a8b2d1; }
+        .text-muted { color: #8892b0 !important; }
+        .form-control { background: #1a1a2e; color: #eee; border-color: #0f3460; }
+        .form-control:focus { background: #1a1a2e; color: #eee; border-color: #e94560; box-shadow: 0 0 0 0.2rem rgba(233,69,96,0.25); }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="/dashboard">🏦 <span class="brand">VulnBank</span></a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/dashboard">Conta</a>
+                <a class="nav-link" href="/transfer">Transferir</a>
+                <a class="nav-link active" href="/fetch-url">Consultas</a>
+                <span class="nav-link text-muted">|</span>
+                <a class="nav-link" href="/logout">Sair</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card p-4">
+                    <h4 class="mb-3">Fetch URL — Consulta de Cotações</h4>
+                    <p class="text-muted small">Ferramenta interna para consultar APIs de câmbio e dados financeiros.</p>
+
+                    <form method="GET" action="/fetch-url">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="url"
+                                   value="{{ url }}" placeholder="https://api.example.com/rates">
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                        </div>
+                    </form>
+
+                    {% if error %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                    {% endif %}
+
+                    {% if content %}
+                    <h6>Resposta:</h6>
+                    <pre>{{ content }}</pre>
+                    {% endif %}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

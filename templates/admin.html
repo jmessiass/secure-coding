@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VulnBank - Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #1a1a2e; color: #eee; }
+        .navbar { background: #16213e !important; }
+        .card { background: #16213e; border: 1px solid #0f3460; }
+        .brand { color: #e94560; font-weight: bold; }
+        a { color: #53a8b6; }
+        .table { color: #eee; }
+        .text-muted { color: #8892b0 !important; }
+        .card code { color: #e94560; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="/dashboard">🏦 <span class="brand">VulnBank</span></a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/dashboard">Conta</a>
+                <a class="nav-link" href="/transfer">Transferir</a>
+                <a class="nav-link" href="/fetch-url">Consultas</a>
+                <span class="nav-link text-muted">|</span>
+                <a class="nav-link" href="/logout">Sair</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h3 class="mb-4">Painel Administrativo — Usuários</h3>
+        <div class="card p-3">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuário</th>
+                        <th>Senha (hash)</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user['id'] }}</td>
+                        <td>{{ user['username'] }}</td>
+                        <td>
+                            {% if user['password'] is defined %}
+                                <code>{{ user['password'] }}</code>
+                            {% else %}
+                                <span class="text-muted">***oculto***</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ user['role'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+</body>
+</html>
