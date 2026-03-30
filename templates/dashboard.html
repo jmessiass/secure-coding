@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VulnBank - Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #1a1a2e; color: #eee; }
+        .navbar { background: #16213e !important; }
+        .card { background: #16213e; border: 1px solid #0f3460; }
+        .brand { color: #e94560; font-weight: bold; }
+        a { color: #53a8b6; }
+        .btn-primary { background: #e94560; border-color: #e94560; }
+        .balance { font-size: 1.5rem; color: #4ecca3; font-weight: bold; }
+        .card h5 { color: #ccd6f6; }
+        .card p { color: #a8b2d1; }
+        .text-muted { color: #8892b0 !important; }
+        .small ul li { color: #a8b2d1; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="/dashboard">🏦 <span class="brand">VulnBank</span></a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link active" href="/dashboard">Conta</a>
+                <a class="nav-link" href="/transfer">Transferir</a>
+                <a class="nav-link" href="/fetch-url">Consultas</a>
+                <span class="nav-link text-muted">|</span>
+                <a class="nav-link" href="/logout">Sair ({{ username }})</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h3 class="mb-4">Suas Contas</h3>
+        <div class="row">
+            {% for acc in accounts %}
+            <div class="col-md-6 mb-3">
+                <div class="card p-3">
+                    <h5>Conta: {{ acc['account_number'] }}</h5>
+                    <p>Tipo: {{ acc['account_type'] }}</p>
+                    <p class="balance">R$ {{ "%.2f"|format(acc['balance']) }}</p>
+                    <a href="/account/{{ acc['id'] }}" class="btn btn-sm btn-primary">Ver detalhes</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+    </div>
+</body>
+</html>

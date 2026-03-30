@@ -1,0 +1,8 @@
+FROM python:3.11-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+RUN python seed_db.py vulnerable
+EXPOSE 5555
+CMD ["python", "app_vulnerable.py"]
